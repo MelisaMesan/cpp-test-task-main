@@ -30,6 +30,7 @@ set(Sources
         ./Types/TY_Base.cpp
         ./repository/utils.hpp
         ./repository/utils.cpp
+        ./repository/FUReader.cpp
         ./repository/FUSimpleReader.hpp
         ./repository/FUSimpleReader.cpp
         ./repository/FUSReplaceReader.hpp

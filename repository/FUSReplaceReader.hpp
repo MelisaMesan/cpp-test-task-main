@@ -5,22 +5,33 @@
 
 class TY_Blob;
 
-
 namespace functions::repository::replace
 {
-    struct Function
+    enum class ReplaceElement
+    {
+        document,
+        functions,
+        function,
+        id,
+        source,
+        pattern,
+        replacement,
+        unknown
+    };
+
+    struct ReplaceFunction
     {
         ST_String id;
         ST_String source;
         ST_String pattern;
         ST_String replacement;
+        void set(enum ReplaceElement elem, const char *string);
+        static ReplaceElement toElement(std::string_view name);
     };
 
-    using Functions = std::vector<Function>;
+} // namespace functions::repository::replace
+
+#endif // E2ERUNTIME_FUSREPLACEREADER_HPP
 
 
-    Functions  readRepo( const TY_Blob &data, std::string_view repo );
 
-}//namespace functions::repository::fus::replace
-
-#endif //E2ERUNTIME_FUSREPLACEREADER_HPP

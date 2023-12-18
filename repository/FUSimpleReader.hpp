@@ -2,20 +2,28 @@
 #define E2ERUNTIME_FUSIMPLEREADER_HPP
 
 #include "../String/ST_String.hpp"
-class TY_Blob;
 
 namespace functions::repository::simple
 {
 
-    struct Function {
-        ST_String id;
-        ST_String source;
+    enum class SimpleElement
+    {
+        document,
+        functions,
+        function,
+        id,
+        source,
+        unknown
     };
 
-    using Functions = std::vector<Function>;
+    struct SimpleFunction
+    {
+        ST_String id;
+        ST_String source;
+        void set(enum SimpleElement elem, const char *string);
+        static SimpleElement toElement(std::string_view name);
+    };
 
-    Functions readRepo( const TY_Blob &data, std::string_view repo );
+} // namespace functions::repository::simple
 
-}//namespace functions::repository::simple
-
-#endif //E2ERUNTIME_FUSIMPLEREADER_HPP
+#endif // E2ERUNTIME_FUSIMPLEREADER_HPP
