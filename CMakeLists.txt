@@ -60,3 +60,26 @@ get_target_property(_inc_dir xerces-c INCLUDE_DIRECTORIES)
 target_include_directories(xerces-c SYSTEM BEFORE INTERFACE "$<BUILD_INTERFACE:${_inc_dir}>")
 
 target_link_libraries(parser PUBLIC xerces-c fmt::fmt)
+
+FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.zip
+)
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
+
+add_executable(
+        unit_tests
+        ./tests/FUSimpleReader_test.cpp
+        ./tests/FUSReplaceReader_test.cpp
+)
+
+target_link_libraries(
+        unit_tests
+        parser 
+        GTest::gtest_main
+)
+
+add_test(NAME unit_tests COMMAND unit_tests)
+
